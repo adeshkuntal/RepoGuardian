@@ -4,12 +4,13 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import RepoSelect from "./pages/RepoSelect";
 import RepoAnalysis from "./pages/RepoAnalysis";
+import CompareRepos from "./pages/CompareRepos";
 
 function App() {
   return (
     <Router>
       <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
-        
+
         {/* Navbar */}
         <Navbar />
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/select-repo" element={<RepoSelect />} />
               <Route path="/analysis/:repoId" element={<RepoAnalysis />} />
+              <Route path="/compare" element={<CompareRepos />} />
             </Routes>
           </div>
         </main>

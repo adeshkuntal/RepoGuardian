@@ -4,17 +4,26 @@ const RepoCard = ({ repo, onSelect, selected }) => {
       className={`
         rounded-2xl p-5 border transition-all duration-300 shadow-md
         bg-slate-800
-        ${
-          selected
-            ? "border-indigo-500 ring-2 ring-indigo-500/30"
-            : "border-slate-700 hover:border-indigo-400 hover:shadow-xl hover:-translate-y-1"
+        ${selected
+          ? "border-indigo-500 ring-2 ring-indigo-500/30"
+          : "border-slate-700 hover:border-indigo-400 hover:shadow-xl hover:-translate-y-1"
         }
       `}
     >
-      {/* Repo Name */}
-      <h3 className="text-lg font-semibold text-slate-200 truncate">
-        {repo.name}
-      </h3>
+      {/* Repo Name & Status */}
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-lg font-semibold text-slate-200 truncate pr-2">
+          {repo.name}
+        </h3>
+        {repo.activityStatus && (
+          <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded border ${repo.activityStatus === 'Active' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
+              repo.activityStatus === 'Moderate' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
+                'bg-red-500/10 text-red-400 border-red-500/20'
+            }`}>
+            {repo.activityStatus}
+          </span>
+        )}
+      </div>
 
       {/* Description */}
       <p className="text-slate-400 text-sm mt-2 line-clamp-3">

@@ -81,9 +81,10 @@ router.post("/trigger/:repoId", async (req, res) => {
       securityConcerns: analysis.securityConcerns || "None",
     });
 
-    // Update Repo lastAnalyzed and healthScore
+    // Update Repo lastAnalyzed, healthScore, and activityStatus
     repo.lastAnalyzed = new Date();
     repo.healthScore = finalScore;
+    repo.activityStatus = activityStatus;
     await repo.save();
 
     res.json(report);
@@ -128,6 +129,35 @@ router.get("/commits/:repoId", async (req, res) => {
   } catch (error) {
     console.error("Commit Activity Error:", error);
     res.status(500).json({ error: "Failed to fetch commit activity" });
+  }
+});
+
+// GET /analysis/compare/:repoId1/:repoId2 - Compare two repos
+router.get("/compare/:repoId1/:repoId2", async (req, res) => {
+  try {
+    const { repoId1, repoId2 } = req.params;
+
+    const [repo1, repo2] = await Promise.all([
+      Repo.findById(repoId1),
+      Repo.findById(repoId2)
+    ]);
+
+    if (!repo1 || !repo2) {
+      return res.status(404).json({ error: "One or both repositories not found" });
+    }
+
+    const [report1, report2] = await Promise.all([
+      Report.findOne({ repoId: repoId1 }).sort({ createdAt: -1 }),
+      Report.findOne({ repoId: repoId2 }).sort({ createdAt: -1 })
+    ]);
+
+    res.json({
+      repo1: { details: repo1, report: report1 || null },
+      repo2: { details: repo2, report: report2 || null }
+    });
+  } catch (error) {
+    console.error("Comparison Error:", error);
+    res.status(500).json({ error: "Failed to compare repositories" });
   }
 });
 

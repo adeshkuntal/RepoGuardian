@@ -10,7 +10,8 @@ const repoSchema = new mongoose.Schema({
   language: String,
   lastAnalyzed: { type: Date, default: null },
   isActive: { type: Boolean, default: true },
-  healthScore: { type: Number, default: 0 }
+  healthScore: { type: Number, default: 0 },
+  activityStatus: { type: String, enum: ['Active', 'Moderate', 'Inactive'], default: 'Active' }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Repo", repoSchema);

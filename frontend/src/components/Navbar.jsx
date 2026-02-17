@@ -37,6 +37,13 @@ const Navbar = () => {
                 Dashboard
               </Link>
 
+              <Link
+                to={`/compare?user=${user}`}
+                className="hidden sm:block text-slate-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+              >
+                Compare
+              </Link>
+
               <button
                 onClick={handleLogout}
                 className="px-4 py-2 text-sm font-medium rounded-xl bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-all duration-200"
