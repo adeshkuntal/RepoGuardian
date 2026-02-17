@@ -58,9 +58,8 @@ const ReportCard = ({ report, onDelete, isDeleting }) => {
             <button
               onClick={onDelete}
               disabled={isDeleting}
-              className={`text-xs px-3 py-1.5 rounded-lg border border-slate-600 bg-slate-700 hover:bg-slate-600 transition ${
-                isDeleting ? "opacity-50 cursor-not-allowed" : ""
-              }`}
+              className={`text-xs px-3 py-1.5 rounded-lg border border-slate-600 bg-slate-700 hover:bg-slate-600 transition ${isDeleting ? "opacity-50 cursor-not-allowed" : ""
+                }`}
             >
               {isDeleting ? "Deleting..." : "Delete"}
             </button>
@@ -114,19 +113,7 @@ const ReportCard = ({ report, onDelete, isDeleting }) => {
                 </div>
               </div>
 
-              {/* Activity */}
-              <div>
-                <div className="flex justify-between text-slate-400 mb-1">
-                  <span>Activity</span>
-                  <span>{report.activityScore ?? "-"}</span>
-                </div>
-                <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-indigo-300 rounded-full transition-all duration-500"
-                    style={{ width: `${report.activityScore || 0}%` }}
-                  ></div>
-                </div>
-              </div>
+
 
             </div>
           </div>

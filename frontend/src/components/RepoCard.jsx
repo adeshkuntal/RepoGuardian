@@ -17,8 +17,8 @@ const RepoCard = ({ repo, onSelect, selected }) => {
         </h3>
         {repo.activityStatus && (
           <span className={`text-[10px] uppercase font-bold px-2 py-0.5 rounded border ${repo.activityStatus === 'Active' ? 'bg-green-500/10 text-green-400 border-green-500/20' :
-              repo.activityStatus === 'Moderate' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
-                'bg-red-500/10 text-red-400 border-red-500/20'
+            repo.activityStatus === 'Moderate' ? 'bg-orange-500/10 text-orange-400 border-orange-500/20' :
+              'bg-red-500/10 text-red-400 border-red-500/20'
             }`}>
             {repo.activityStatus}
           </span>

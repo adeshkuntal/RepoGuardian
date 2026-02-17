@@ -84,7 +84,7 @@ router.post("/trigger/:repoId", async (req, res) => {
     // Update Repo lastAnalyzed, healthScore, and activityStatus
     repo.lastAnalyzed = new Date();
     repo.healthScore = finalScore;
-    repo.activityStatus = activityStatus;
+
     await repo.save();
 
     res.json(report);
