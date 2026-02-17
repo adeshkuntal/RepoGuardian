@@ -40,7 +40,24 @@ const analyzeRepo = async (repoName, commitCount, commitMessages) => {
       text = text.replace(/^```\n/, "").replace(/\n```$/, "");
     }
 
-    return JSON.parse(text);
+    let resultJson;
+    try {
+      resultJson = JSON.parse(text);
+    } catch (e) {
+      console.warn("JSON parse failed, attempting regex extraction...");
+      // Regex fallbacks
+      const scoreMatch = text.match(/"score":\s*(\d+)/);
+      const qualityMatch = text.match(/"qualityReview":\s*"([^"]+)"/);
+
+      resultJson = {
+        qualityReview: qualityMatch ? qualityMatch[1] : "Analysis parsing failed.",
+        suggestions: ["Could not parse specific suggestions."],
+        securityConcerns: "Unknown",
+        score: scoreMatch ? parseInt(scoreMatch[1]) : 50
+      };
+    }
+
+    return resultJson;
   } catch (error) {
     console.error("Gemini analysis failed:", error);
     // Fallback if AI fails
